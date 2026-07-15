@@ -137,11 +137,14 @@ function createApp() {
     panes['edit'].appendChild(floorplanEditor);
 
     const mapPanel = panes['map'].appendElement({ tag: 'div', className: 'left-panel' });
-    [floorplanContainer,,] = mapPanel.appendElements(
-        { tag: 'floorplan-container', attributes: { status: 1 } },
+    // Create buttons first so they exist when floorplan-container's connectedCallback runs
+    const [, placeBtn, unplaceBtn] = mapPanel.appendElements(
+        { tag: 'div' },  // placeholder, kept for destructuring compatibility
         { tag: 'button', className: 'next', attributes: { id: 'place' }, content: 'Place in current view' },
         { tag: 'button', className: 'previous', attributes: { id: 'unplace', disabled: 'disabled' }, content: 'Remove from the map' }
     );
+    floorplanContainer = E('floorplan-container', null, { status: 1 });
+    mapPanel.insertBefore(floorplanContainer, placeBtn);
     worldMap = panes['map'].appendElement('world-map');
 
     const miscPanel = panes['misc'].appendElement({ tag: 'div', className: 'top-panel' });
