@@ -164,7 +164,7 @@ function createApp() {
 
     function updateHeight() {
         height.disabled = !zmin.checkValidity();
-        height.value = parseFloat(zmax.value) - parseFloat(zmin.value);
+        height.value = (parseFloat(zmax.value) || 0) - (parseFloat(zmin.value) || 0);
         updateStatus();
     }
 

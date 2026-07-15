@@ -5,7 +5,7 @@ import { BoundingBox2, Matrix2, Point2, Vector2 } from '/js/linalg.mjs';
 import { Stylable } from '/js/mixins.mjs';
 import { createElement as E } from '/js/util.mjs';
 import '/js/leaflet.js';
-import '/js/leaflet.imageoverlay.rotated.js';
+import '/js/Leaflet.ImageOverlay.Rotated.js';
 
 const AVERAGE_EARTH_RADIUS = 6_371_008.771
 
