@@ -18,15 +18,13 @@ const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/web'];
 
 
 // Import component modules
-function loadComponent(name) {
-    import(`/js/components/${name}.mjs`);
-}
-
-loadComponent('floorplan-container');
-loadComponent('world-map');
-loadComponent('floorplan-editor');
-loadComponent('floorplan-viewer');
-loadComponent('tab-container');
+const componentsLoaded = Promise.all([
+    import('/js/components/floorplan-container.mjs'),
+    import('/js/components/world-map.mjs'),
+    import('/js/components/floorplan-editor.mjs'),
+    import('/js/components/floorplan-viewer.mjs'),
+    import('/js/components/tab-container.mjs'),
+]);
 
 
 // Delete the application and open the intro modal
@@ -217,7 +215,9 @@ function openModal() {
     document.body.classList.add('modal-open');
 }
 
-fetch('/config.json').then(r => r.json().then(data => {
-    window.apiURL = data.api;
+Promise.all([
+    fetch('/config.json').then(r => r.json()).then(data => { window.apiURL = data.api; }),
+    componentsLoaded,
+]).then(() => {
     openModal();
-}));
+});
