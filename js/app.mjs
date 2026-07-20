@@ -189,7 +189,7 @@ function loadFloorplan(e) {
     }
 
     const reader = new FileReader();
-    reader.addEventListener('load', () => b64Data = reader.result.split(',')[1]);
+    reader.addEventListener('load', () => b64Data = reader.result);
     reader.readAsDataURL(file);
     const url = URL.createObjectURL(file);
     floorplanContainer.setAttribute('src', url);

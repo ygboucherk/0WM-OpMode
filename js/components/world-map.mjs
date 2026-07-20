@@ -88,7 +88,8 @@ class WorldMap extends Stylable(HTMLElement) {
                         dstAnchors.push(new Point2(anchor.lng, anchor.lat));
                     }
                     const srcRect = new Point2(data.width, data.height);
-                    this.updateOverlay(srcAnchors, srcRect, `${window.apiURL}/${data.path}`, dstAnchors);
+                    const filename = data.path.split('/').pop();
+                    this.updateOverlay(srcAnchors, srcRect, `${window.apiURL}/data/${filename}`, dstAnchors);
                     this.#overlay = null;
                 }).catch(err => {
                     alert(err);
